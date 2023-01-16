@@ -1,1 +1,45 @@
 
+from time import *
+from tkinter import *
+
+
+
+def time_update():
+    t_string = strftime("%H:%M:%S")
+    t_label.config(text = "Current Time: " +t_string)
+    t_label.after(1000,time_update) # this is known as a recursive function. Calling the function within itself
+    
+    d_string = strftime("%A")
+    d_label.config(text = "Day of the Week: "+ d_string)
+    
+    
+    y_string = strftime("%Y")
+    y_label.config(text = "Year: "+ y_string)
+   
+
+    w_string = strftime("%W")
+    w_label.config(text = "Week of the year: " + w_string)
+    
+
+
+window = Tk()
+
+
+
+#CLOCK function
+t_label = Label(window,font = ("Comic Sans", 100),fg = "yellow",bg = "black", relief= RAISED, padx= 10, pady = 10,bd = 10)
+t_label.pack()
+t_lable_info = t_label.winfo_width
+
+
+d_label = Label(window,font = ("Arial", 50),fg = "green",bg = "black", relief = RAISED, padx = 10,pady=10, bd = 10)
+d_label.pack()
+
+y_label = Label(window,font = ("Calibri", 75),fg = "purple",bg = "black",relief = RAISED, padx = 10,pady=10, bd = 10)
+y_label.pack()
+
+w_label = Label(window,font = ("Calibri", 75),fg = "pink",bg = "black",relief = RAISED, padx = 10,pady=10, bd = 10)
+w_label.pack()
+time_update()
+
+window.mainloop()
