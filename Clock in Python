@@ -1,16 +1,29 @@
-
 from time import *
 from tkinter import *
+from datetime import *
+#The * imports everything from time and tkinter and datetime
 
-
+def eurodate(date): #From Stack Overflow -> Converts US date to European Date
+    euro_date = datetime.strptime(date, '%m/%d/%y').strftime("%d/%m/%y")
+    return euro_date
 
 def time_update():
     t_string = strftime("%H:%M:%S")
     t_label.config(text = "Current Time: " +t_string)
     t_label.after(1000,time_update) # this is known as a recursive function. Calling the function within itself
+    #the .after allows the function to be recalled after the time. it takes to2 args ( time and the function) 
     
+    
+    date_string = strftime("%x")
+    date_label.config(text = "Todays Date (American Version): "+ date_string )
+
+ 
+    euro_date = eurodate(date_string) # This function takes the US date input made from date_string = strftime("%x") line and converted it with the function 'eurodate'
+    euro_date_label.config(text = "Todays Date (Europen Version): "+ euro_date )
+    
+
     d_string = strftime("%A")
-    d_label.config(text = "Day of the Week: "+ d_string)
+    d_label.config(text = "Day of the Week: "+ d_string )
     
     
     y_string = strftime("%Y")
@@ -21,25 +34,34 @@ def time_update():
     w_label.config(text = "Week of the year: " + w_string)
     
 
+#the function time_update displys the window characteristics (which are the date( US and European),day,time,week of the year) 
 
 window = Tk()
 
 
+#CLOCK characteristcs
 
-#CLOCK function
+#These are the lables displaying time, day, dates, week and year
 t_label = Label(window,font = ("Comic Sans", 100),fg = "yellow",bg = "black", relief= RAISED, padx= 10, pady = 10,bd = 10)
 t_label.pack()
-t_lable_info = t_label.winfo_width
-
 
 d_label = Label(window,font = ("Arial", 50),fg = "green",bg = "black", relief = RAISED, padx = 10,pady=10, bd = 10)
 d_label.pack()
+
+date_label = Label(window,font = ("Arial", 50),fg = "brown",bg = "black", relief = RAISED, padx = 10,pady=10, bd = 10)
+date_label.pack()
+
+euro_date_label = Label(window,font = ("Arial", 50),fg = "silver",bg = "black", relief = RAISED, padx = 10,pady=10, bd = 10)
+euro_date_label.pack()
+
 
 y_label = Label(window,font = ("Calibri", 75),fg = "purple",bg = "black",relief = RAISED, padx = 10,pady=10, bd = 10)
 y_label.pack()
 
 w_label = Label(window,font = ("Calibri", 75),fg = "pink",bg = "black",relief = RAISED, padx = 10,pady=10, bd = 10)
 w_label.pack()
-time_update()
+
+
+time_update() # this calls the time_update function defined above. 
 
 window.mainloop()
